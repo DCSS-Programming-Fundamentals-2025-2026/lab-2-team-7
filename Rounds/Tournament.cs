@@ -1,5 +1,4 @@
-using System;
-using System.Collections.Generic;
+using Number_tournament.FTTournamentBrackets;
 
 class Tournament
 {
@@ -13,12 +12,7 @@ class Tournament
             return null;
         }
 
-        List<string> remainingPlayers = new List<string>();
-        for (int i = 0; i < count; i++)
-        {
-            remainingPlayers.Add(players[i]);
-        }
-
+        TournamentBracket remainingPlayers = new TournamentBracket(players, count);
         int roundNumber = 1;
 
         while (remainingPlayers.Count > 1)
@@ -29,23 +23,25 @@ class Tournament
             Console.WriteLine("Нажміть Enter щоб почати раунд...");
             Console.ReadLine();
 
-            List<string> nextRound = new List<string>();
+            string[] winners = new string[remainingPlayers.Count];
+            int nextCount = 0;
 
             for (int i = 0; i < remainingPlayers.Count; i += 2)
             {
                 if (i + 1 < remainingPlayers.Count)
                 {
-                    string winner = PlayMatch(remainingPlayers[i], remainingPlayers[i + 1]);
-                    nextRound.Add(winner);
+                    string winner = PlayMatch(remainingPlayers.GetAt(i), remainingPlayers.GetAt(i + 1));
+                    winners[nextCount++] = winner;
                 }
                 else
                 {
-                    Console.WriteLine($"\n{remainingPlayers[i]} отримує пропуск у наступний раунд (bye).");
-                    nextRound.Add(remainingPlayers[i]);
+                    string byePlayer = remainingPlayers.GetAt(i);
+                    Console.WriteLine($"\n{byePlayer} отримує пропуск у наступний раунд (bye).");
+                    winners[nextCount++] = byePlayer;
                 }
             }
 
-            remainingPlayers = nextRound;
+            remainingPlayers = new TournamentBracket(winners, nextCount);
             roundNumber++;
 
             if (remainingPlayers.Count > 1)
@@ -55,7 +51,7 @@ class Tournament
             }
         }
 
-        return remainingPlayers[0];
+        return remainingPlayers.GetAt(0);
     }
 
     private string PlayMatch(string player1, string player2)

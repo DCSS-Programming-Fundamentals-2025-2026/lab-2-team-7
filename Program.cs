@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Number_tournament.FTIComparer;
+using Number_tournament.FTPlayers;
 using System.Text;
 
 class Program
 {
     static void Main()
     {
+        Player[] playersList = new Player[20];
         string[] players = new string[20];
         int[] points = new int[20];
         int[] repeats = new int[20];
@@ -31,7 +33,9 @@ class Program
                     }
 
                     Console.Write("Введіть ім'я гравця: ");
-                    players[index] = Console.ReadLine() ?? "Гравець";
+                    string name = Console.ReadLine() ?? "Гравець";
+                    playersList[index] = new Player(name, 0, 0);
+                    players[index] = name;
                     points[index] = 0;
                     repeats[index] = 0;
                     index++;
@@ -80,6 +84,7 @@ class Program
                         if (playerNumber == randomNumber)
                         {
                             repeats[i]++;
+                            playersList[i].Repeats++;
                             Console.WriteLine($"Вгадали! Серія: {repeats[i]}");
                         }
                         else
@@ -87,10 +92,13 @@ class Program
                             Console.WriteLine($"Не вгадали. Було число {randomNumber}");
 
                             int earned = round.CountPoints(repeats[i]);
+                            earned = round.CountPoints(playersList[i].Repeats);
                             points[i] += earned;
+                            playersList[i].Points += earned;
 
                             Console.WriteLine($"Отримано {earned} балів.");
                             repeats[i] = 0;
+                            playersList[i].Repeats = 0;
                         }
 
                         Console.WriteLine();
@@ -113,29 +121,22 @@ class Program
                         if (repeats[i] > 0)
                         {
                             points[i] += round.CountPoints(repeats[i]);
+                            playersList[i].Points += round.CountPoints(playersList[i].Repeats);
                             repeats[i] = 0;
+                            playersList[i].Repeats = 0;
                         }
                     }
 
-                    for (int i = 0; i < index - 1; i++)
-                    {
-                        for (int j = 0; j < index - i - 1; j++)
-                        {
-                            if (points[j] < points[j + 1])
-                            {
-                                (points[j], points[j + 1]) = (points[j + 1], points[j]);
-                                (players[j], players[j + 1]) = (players[j + 1], players[j]);
-                            }
-                        }
-                    }
-
+                    Array.Sort(playersList, 0, index, new PlayerScoreComparer());
                     for (int i = 0; i < index; i++)
                     {
-                        Console.WriteLine($"{i + 1}. {players[i]} — {points[i]} балів");
+                        Player p = playersList[i];
+                        Console.WriteLine($"{i + 1}. {p.NickName} - {p.Points} балів");
                     }
 
                     index = 0;
                     RoundBase.ResetRounds();
+                    Array.Clear(playersList, 0, playersList.Length);
                     Console.WriteLine("\nГру завершено. Дані та рахунок раундів скинуто.");
                     break;
 
@@ -161,6 +162,7 @@ class Program
 
                     index = 0;
                     RoundBase.ResetRounds();
+                    Array.Clear(playersList, 0, playersList.Length);
                     Console.WriteLine("Дані скинуто. Нажміть Enter...");
                     Console.ReadLine();
                     break;
