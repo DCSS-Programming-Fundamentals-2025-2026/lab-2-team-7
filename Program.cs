@@ -1,4 +1,5 @@
-﻿using Number_tournament.FTIComparer;
+﻿using Number_tournament.Comparers;
+using Number_tournament.FTCollections;
 using Number_tournament.FTPlayers;
 using System.Text;
 
@@ -6,10 +7,7 @@ class Program
 {
     static void Main()
     {
-        Player[] playersList = new Player[20];
-        string[] players = new string[20];
-        int[] points = new int[20];
-        int[] repeats = new int[20];
+        PlayerCollection playersCollection = new PlayerCollection(20);
 
         int index = 0;
         Random random = new Random();
@@ -34,11 +32,8 @@ class Program
 
                     Console.Write("Введіть ім'я гравця: ");
                     string name = Console.ReadLine() ?? "Гравець";
-                    playersList[index] = new Player(name, 0, 0);
-                    players[index] = name;
-                    points[index] = 0;
-                    repeats[index] = 0;
-                    index++;
+                    playersCollection.Add(new Player(name, 0, 0));
+                    index = playersCollection.Count;
 
                     Console.WriteLine("Гравця додано!");
                     break;
@@ -53,7 +48,18 @@ class Program
                     Console.WriteLine("\n--- Список гравців ---");
                     for (int i = 0; i < index; i++)
                     {
-                        Console.WriteLine($"{i + 1}. {players[i]} — {points[i]} балів (серія: {repeats[i]})");
+                        Player p = playersCollection.GetAt(i);
+                        Console.WriteLine($"{i + 1}. {p.NickName} — {p.Points} балів (серія: {p.Repeats})");
+                    }
+
+                    Console.WriteLine("\n--- Перебір через enumerator ---");
+                    var it = playersCollection.GetEnumerator();
+                    int enumIndex = 1;
+                    while (it.MoveNext())
+                    {
+                        Player p = (Player)it.Current;
+                        Console.WriteLine($"{enumIndex}. {p.NickName} — {p.Points} балів (серія: {p.Repeats})");
+                        enumIndex++;
                     }
                     break;
 
@@ -69,9 +75,10 @@ class Program
 
                     for (int i = 0; i < index; i++)
                     {
+                        Player current = playersCollection.GetAt(i);
                         int randomNumber = random.Next(1, 11);
 
-                        Console.Write($"{players[i]}, виберіть число (1-10): ");
+                        Console.Write($"{current.NickName}, виберіть число (1-10): ");
                         string inputNumber = Console.ReadLine() ?? "";
 
                         if (!int.TryParse(inputNumber, out int playerNumber))
@@ -83,22 +90,18 @@ class Program
 
                         if (playerNumber == randomNumber)
                         {
-                            repeats[i]++;
-                            playersList[i].Repeats++;
-                            Console.WriteLine($"Вгадали! Серія: {repeats[i]}");
+                            current.Repeats++;
+                            Console.WriteLine($"Вгадали! Серія: {current.Repeats}");
                         }
                         else
                         {
                             Console.WriteLine($"Не вгадали. Було число {randomNumber}");
 
-                            int earned = round.CountPoints(repeats[i]);
-                            earned = round.CountPoints(playersList[i].Repeats);
-                            points[i] += earned;
-                            playersList[i].Points += earned;
+                            int earned = round.CountPoints(current.Repeats);
+                            current.Points += earned;
 
                             Console.WriteLine($"Отримано {earned} балів.");
-                            repeats[i] = 0;
-                            playersList[i].Repeats = 0;
+                            current.Repeats = 0;
                         }
 
                         Console.WriteLine();
@@ -118,25 +121,30 @@ class Program
                     round = new Round();
                     for (int i = 0; i < index; i++)
                     {
-                        if (repeats[i] > 0)
+                        Player p = playersCollection.GetAt(i);
+                        if (p.Repeats > 0)
                         {
-                            points[i] += round.CountPoints(repeats[i]);
-                            playersList[i].Points += round.CountPoints(playersList[i].Repeats);
-                            repeats[i] = 0;
-                            playersList[i].Repeats = 0;
+                            p.Points += round.CountPoints(p.Repeats);
+                            p.Repeats = 0;
                         }
                     }
 
-                    Array.Sort(playersList, 0, index, new PlayerScoreComparer());
+                    Player[] sortedByScore = new Player[index];
                     for (int i = 0; i < index; i++)
                     {
-                        Player p = playersList[i];
+                        sortedByScore[i] = playersCollection.GetAt(i);
+                    }
+
+                    Array.Sort(sortedByScore, 0, index, new PlayerScoreComparer());
+                    for (int i = 0; i < index; i++)
+                    {
+                        Player p = sortedByScore[i];
                         Console.WriteLine($"{i + 1}. {p.NickName} - {p.Points} балів");
                     }
 
                     index = 0;
                     RoundBase.ResetRounds();
-                    Array.Clear(playersList, 0, playersList.Length);
+                    playersCollection = new PlayerCollection(20);
                     Console.WriteLine("\nГру завершено. Дані та рахунок раундів скинуто.");
                     break;
 
@@ -147,8 +155,14 @@ class Program
                         break;
                     }
 
+                    string[] tournamentPlayers = new string[index];
+                    for (int i = 0; i < index; i++)
+                    {
+                        tournamentPlayers[i] = playersCollection.GetAt(i).NickName;
+                    }
+
                     Tournament tournament = new Tournament();
-                    string? champion = tournament.RunTournament(players, index);
+                    string? champion = tournament.RunTournament(tournamentPlayers, index);
 
                     if (champion != null)
                     {
@@ -162,12 +176,59 @@ class Program
 
                     index = 0;
                     RoundBase.ResetRounds();
-                    Array.Clear(playersList, 0, playersList.Length);
+                    playersCollection = new PlayerCollection(20);
                     Console.WriteLine("Дані скинуто. Нажміть Enter...");
                     Console.ReadLine();
                     break;
 
                 case "6":
+                    if (index == 0)
+                    {
+                        Console.WriteLine("Гравців ще не додано.");
+                        break;
+                    }
+
+                    Console.WriteLine("\n=== СТАТИСТИКА ===");
+
+                    int totalPoints = 0;
+                    Player first = playersCollection.GetAt(0);
+                    int maxPoints = first.Points;
+                    string maxName = first.NickName;
+
+                    for (int i = 0; i < index; i++)
+                    {
+                        Player p = playersCollection.GetAt(i);
+                        totalPoints += p.Points;
+
+                        if (p.Points > maxPoints)
+                        {
+                            maxPoints = p.Points;
+                            maxName = p.NickName;
+                        }
+                    }
+
+                    double average = (double)totalPoints / index;
+                    Console.WriteLine($"Гравців: {index}");
+                    Console.WriteLine($"Сума балів: {totalPoints}");
+                    Console.WriteLine($"Середній бал: {average:F2}");
+                    Console.WriteLine($"Максимум: {maxName} — {maxPoints} балів");
+
+                    Player[] sortedByName = new Player[index];
+                    for (int i = 0; i < index; i++)
+                    {
+                        sortedByName[i] = playersCollection.GetAt(i);
+                    }
+
+                    Array.Sort(sortedByName, 0, index);
+                    Console.WriteLine("\nСортування за ім'ям (IComparable):");
+                    for (int i = 0; i < index; i++)
+                    {
+                        Player p = sortedByName[i];
+                        Console.WriteLine($"{i + 1}. {p.NickName} — {p.Points} балів");
+                    }
+                    break;
+
+                case "7":
                     return;
 
                 default:

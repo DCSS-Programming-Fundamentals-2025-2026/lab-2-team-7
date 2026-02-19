@@ -8,6 +8,7 @@ class Menu
         Console.WriteLine("3) Провести матч");
         Console.WriteLine("4) Закінчити змагання (Вивести лідерборд)");
         Console.WriteLine("5) Турнір з вибуванням");
-        Console.WriteLine("6) Вихід");
+        Console.WriteLine("6) Статистика");
+        Console.WriteLine("7) Вихід");
     }
 }
