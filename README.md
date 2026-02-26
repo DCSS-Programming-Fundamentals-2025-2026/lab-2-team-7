@@ -1,1 +1,5 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/k-3ge8pq)
+# Хто QA/ хто Core
+QA займався *Петров Артем*, Core займався *Мотуз Роман*
+## Як запускати тести
+Для того щоб запустити тести необхідно перейти в папку Test, відкрити термінал та ввести 
+`dotnet test`
