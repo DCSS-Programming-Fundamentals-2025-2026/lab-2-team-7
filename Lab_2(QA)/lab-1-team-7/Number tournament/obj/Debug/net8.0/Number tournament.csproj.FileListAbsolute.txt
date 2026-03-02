@@ -1,0 +1,30 @@
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\bin\Debug\net8.0\Number tournament.exe
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\bin\Debug\net8.0\Number tournament.deps.json
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\bin\Debug\net8.0\Number tournament.runtimeconfig.json
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\bin\Debug\net8.0\Number tournament.dll
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\bin\Debug\net8.0\Number tournament.pdb
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.AssemblyInfoInputs.cache
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.AssemblyInfo.cs
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.csproj.CoreCompileInputs.cache
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.sourcelink.json
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.dll
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\obj\Debug\net8.0\refint\Number tournament.dll
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.pdb
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.genruntimeconfig.cache
+C:\Users\Адмін\OneDrive\Desktop\Lab_2\lab-1-team-7\Number tournament\obj\Debug\net8.0\ref\Number tournament.dll
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\bin\Debug\net8.0\Number tournament.exe
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\bin\Debug\net8.0\Number tournament.deps.json
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\bin\Debug\net8.0\Number tournament.runtimeconfig.json
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\bin\Debug\net8.0\Number tournament.dll
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\bin\Debug\net8.0\Number tournament.pdb
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.AssemblyInfoInputs.cache
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.AssemblyInfo.cs
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.csproj.CoreCompileInputs.cache
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.sourcelink.json
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.dll
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\obj\Debug\net8.0\refint\Number tournament.dll
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.pdb
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\obj\Debug\net8.0\Number tournament.genruntimeconfig.cache
+C:\Users\Адмін\OneDrive\Desktop\Нова папка\Lab_2(QA)\lab-1-team-7\Number tournament\obj\Debug\net8.0\ref\Number tournament.dll
